@@ -566,6 +566,16 @@ spec:
         operator: in
         values:
         - "false"
+    - name: trigger-conforma
+      runAfter:
+        - rpms-signature-scan
+      taskRef:
+        name: trigger-conforma-task
+      params:
+        - name: branch
+          value: "$(params.branch)"
+        - name: workflow_url
+          value: "https://example.com/conforma-trigger"
     workspaces:
     - name: git-auth
       optional: true
