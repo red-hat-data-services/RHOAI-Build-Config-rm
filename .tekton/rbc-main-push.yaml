@@ -581,8 +581,6 @@ spec:
             script: |
               #!/bin/bash
               set -e
-              echo "Checking Tekton Environment Variables:"
-              env | grep TEKTON
               TARGET_BRANCH="$(params.target_branch)"
               echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
               #curl -X POST -H "Content-Type: application/json" -d '{"workflow": "example-workflow", "branch": "'"$(params.target_branch)"'"}' "$(params.workflow_url)"
