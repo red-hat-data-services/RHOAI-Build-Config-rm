@@ -581,6 +581,10 @@ spec:
             script: |
               #!/bin/bash
               set -e
+              echo "PipelineRun Target Branch: $(context.pipelineRun.params.target_branch)"
+              env | grep TEKTON
+              TARGET_BRANCH="$(context.pipelineRun.params.target_branch)"
+              echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
               echo "Received Target Branch: '$(params.target_branch)'"  # Debugging
               export TARGET_BRANCH="$(params.target_branch)"
               echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
