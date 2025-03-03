@@ -567,8 +567,9 @@ spec:
         values:
         - "false"
     - name: trigger-conforma
-      runAfter:
-      - rpms-signature-scan
+      params:
+      - name: pipelinerun-name
+        value: "$(context.pipelineRun.name)"
       taskRef:
         params:
         - name: target_branch
