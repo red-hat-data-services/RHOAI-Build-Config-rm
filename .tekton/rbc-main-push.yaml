@@ -578,6 +578,11 @@ spec:
         steps:
           - name: trigger-workflow
             image: quay.io/centos/centos:stream9
+            env:
+              - name: TARGET_BRANCH
+                value: "$(params.target_branch)"
+              - name: WORKFLOW_URL
+                value: "$(params.workflow_url)"
             script: |
               #!/bin/bash
               set -e
