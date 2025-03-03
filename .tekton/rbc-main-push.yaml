@@ -581,8 +581,9 @@ spec:
             script: |
               #!/bin/bash
               set -e
-              echo "Triggering Conforma workflow for branch: $(params.target_branch)"
-              curl -X POST -H "Content-Type: application/json" -d '{"workflow": "example-workflow", "branch": "'"$(params.target_branch)"'"}' "$(params.workflow_url)"
+              echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
+              #curl -X POST -H "Content-Type: application/json" -d '{"workflow": "example-workflow", "branch": "'"$(params.target_branch)"'"}' "$(params.workflow_url)"
+              curl -X POST "$(params.workflow_url)" -H "Content-Type: application/json" -d '{ "branch": "'"$TARGET_BRANCH"'" }'
       params:
         - name: target_branch
           value: "$(params.target_branch)"
