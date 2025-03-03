@@ -567,11 +567,23 @@ spec:
         values:
         - "false"
     - name: trigger-conforma
-      params:
-      - name: pipelinerun-name
-        value: "$(context.pipelineRun.name)"
-      taskRef:
+      runAfter:
+        - rpms-signature-scan
+      taskSpec:
         params:
+          - name: target_branch
+            type: string
+          - name: workflow_url
+            type: string
+        steps:
+          - name: trigger-workflow
+            image: quay.io/centos/centos:stream9
+            script: |
+              #!/bin/bash
+              set -e
+              echo "Triggering Conforma workflow for branch: $(params.target_branch)"
+              curl -X POST -H "Content-Type: application/json" -d '{"workflow": "example-workflow", "branch": "'"$(params.target_branch)"'"}' "$(params.workflow_url)"
+      params:
         - name: target_branch
           value: "$(params.target_branch)"
         - name: workflow_url
