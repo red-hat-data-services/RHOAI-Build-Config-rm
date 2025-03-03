@@ -568,9 +568,9 @@ spec:
         - "false"
     - name: trigger-conforma
       runAfter:
-        - rpms-signature-scan
+      - rpms-signature-scan
       taskRef:
-      params:
+        params:
         - name: target_branch
           value: "$(params.target_branch)"
         - name: workflow_url
