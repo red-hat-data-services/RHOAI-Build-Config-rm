@@ -573,6 +573,7 @@ spec:
         params:
           - name: target_branch
             type: string
+            value: "$(params.target_branch)"
           - name: workflow_url
             type: string
         steps:
@@ -592,11 +593,7 @@ spec:
     
               curl -X POST "$(params.workflow_url)" -H "Content-Type: application/json" \
                    -d '{ "branch": "'"$TARGET_BRANCH"'" }'
-      params:
-        - name: target_branch
-          value: "$(context.pipelineRun.params.target_branch)"
-        - name: workflow_url
-          value: "https://example.com/conforma-trigger"
+
     workspaces:
     - name: git-auth
       optional: true
