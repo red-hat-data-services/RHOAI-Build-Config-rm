@@ -570,10 +570,9 @@ spec:
       runAfter:
         - rpms-signature-scan
       taskRef:
-        name: trigger-conforma-task
       params:
-        - name: branch
-          value: "$(params.branch)"
+        - name: target_branch
+          value: "$(params.target_branch)"
         - name: workflow_url
           value: "https://example.com/conforma-trigger"
     workspaces:
