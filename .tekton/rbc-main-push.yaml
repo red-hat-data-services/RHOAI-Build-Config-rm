@@ -59,6 +59,14 @@ spec:
       description: Revision of the Source Repository
       name: revision
       type: string
+    - name: target_branch
+      type: string
+      description: "Target branch for the workflow"
+      default: "main"  # Set a default value
+    - name: workflow_url
+      type: string
+      description: "URL of the workflow to trigger"
+      default: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml""
     - description: Fully Qualified Output Image
       name: output-image
       type: string
