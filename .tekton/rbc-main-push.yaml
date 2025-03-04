@@ -7,7 +7,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
-      == "main"
+      == "test"
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: rbc-rm
@@ -608,9 +608,8 @@ spec:
               TARGET_BRANCH="$(params.target_branch)" 
               echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
     
-              curl -X POST "$(params.workflow_url)" -H "Content-Type: application/json" \
-                   -d '{ "branch": "'"$TARGET_BRANCH"'" }'
-
+              curl -X POST "$WORKFLOW_URL" -H "Content-Type: application/json" \
+               -d '{ "ref": "'"$TARGET_BRANCH"'" }'
     workspaces:
     - name: git-auth
       optional: true
