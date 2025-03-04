@@ -27,6 +27,10 @@ spec:
     value: Dockerfile.konflux
   - name: path-context
     value: .
+  - name: target_branch
+    value: "main"
+  - name: workflow_url
+    value: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml"
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
