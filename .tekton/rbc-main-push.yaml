@@ -581,9 +581,9 @@ spec:
     - name: trigger-conforma
       params:
       - name: target_branch
-        type: string
+        value: "$(params.target_branch)"  # Pass value here
       - name: workflow_url
-        type: string
+        value: "$(params.workflow_url)" 
       runAfter:
         - rpms-signature-scan
       taskSpec:
