@@ -27,6 +27,10 @@ spec:
     value: Dockerfile.konflux
   - name: path-context
     value: .
+  - name: target_branch
+    value: "main"
+  - name: workflow_url
+    value: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml"
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
@@ -55,6 +59,14 @@ spec:
       description: Revision of the Source Repository
       name: revision
       type: string
+    - name: target_branch
+      type: string
+      description: "Target branch for the workflow"
+      default: "main"  # Set a default value
+    - name: workflow_url
+      type: string
+      description: "URL of the workflow to trigger"
+      default: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml"
     - description: Fully Qualified Output Image
       name: output-image
       type: string
@@ -417,7 +429,7 @@ spec:
         - name: name
           value: sast-coverity-check-oci-ta
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-sast-coverity-check-oci-ta:0.2@sha256:61a4b5afd0c49cd999fbe60b36e2d92750c7fb337942015929b3d3f393e3bde5
+          value: quay.io/konflux-ci/tekton-catalog/task-sast-coverity-check-oci-ta::0.1@sha256:87b966c4b2017aa38174180505409b2c5cc7c1c140d9879411dec34a37cfa8be
         - name: kind
           value: task
         resolver: bundles
@@ -566,6 +578,38 @@ spec:
         operator: in
         values:
         - "false"
+   - name: trigger-conforma
+      params:
+      - name: target_branch
+        value: "$(params.target_branch)"  # Pass value here
+      - name: workflow_url
+        value: "$(params.workflow_url)" 
+      runAfter:
+        - rpms-signature-scan
+      taskSpec:
+        params:
+          - name: target_branch
+            type: string
+            value: "$(params.target_branch)"
+          - name: workflow_url
+            type: string
+        steps:
+          - name: trigger-workflow
+            image: quay.io/centos/centos:stream9
+            env:
+              - name: TARGET_BRANCH
+                value: "$(params.target_branch)"
+              - name: WORKFLOW_URL
+                value: "$(params.workflow_url)"
+            script: |
+              #!/bin/bash
+              set -e
+              
+              TARGET_BRANCH="$(params.target_branch)" 
+              echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
+    
+              curl -X POST "$WORKFLOW_URL" -H "Content-Type: application/json" \
+               -d '{ "ref": "'"$TARGET_BRANCH"'" }'      
     workspaces:
     - name: git-auth
       optional: true
