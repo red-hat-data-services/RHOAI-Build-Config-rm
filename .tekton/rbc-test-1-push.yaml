@@ -601,6 +601,11 @@ spec:
                 value: "$(params.target_branch)"
               - name: WORKFLOW_URL
                 value: "$(params.workflow_url)"
+              - name: GITHUB_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: github-token-secret
+                    key: token
             script: |
               #!/bin/bash
               set -e
