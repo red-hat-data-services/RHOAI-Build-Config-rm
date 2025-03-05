@@ -584,8 +584,8 @@ spec:
         value: "$(params.target_branch)"  # Pass value here
       - name: workflow_url
         value: "$(params.workflow_url)" 
-      runAfter:
-        - rpms-signature-scan
+      runAfter: prefetch-dependencies
+        - 
       taskSpec:
         params:
           - name: target_branch
