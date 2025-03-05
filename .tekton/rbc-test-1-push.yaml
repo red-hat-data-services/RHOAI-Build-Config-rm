@@ -608,8 +608,16 @@ spec:
               TARGET_BRANCH="$(params.target_branch)" 
               echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
     
-              curl -X POST "$WORKFLOW_URL" -H "Content-Type: application/json" \
-               -d '{ "ref": "'"$TARGET_BRANCH"'" }'  
+              curl -X POST "$WORKFLOW_URL" \
+                -H "Content-Type: application/json" \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                -d '{
+                      "event_type": "trigger-snapshot",
+                      "client_payload": {
+                        "ref": "'"$TARGET_BRANCH"'", 
+                        "snapshot_target": "'"$SNAPSHOT_TARGET"'"
+                      }
+                    }'
     workspaces:
     - name: git-auth
       optional: true
