@@ -30,7 +30,7 @@ spec:
   - name: target_branch
     value: '{{target_branch}}'
   - name: workflow_url
-    value: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml"
+    value: "https://github.com/MohammadiIram/conforma-reporter/blob/main/.github/workflows/main.yml"
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
@@ -66,7 +66,7 @@ spec:
     - name: workflow_url
       type: string
       description: "URL of the workflow to trigger"
-      default: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml"
+      default: "https://github.com/MohammadiIram/conforma-reporter/blob/main/.github/workflows/main.yml"
     - description: Fully Qualified Output Image
       name: output-image
       type: string
