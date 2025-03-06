@@ -15,10 +15,13 @@ jobs:
       - name: Debug Event Payload
         run: echo '${{ toJson(github.event) }}'
 
+      - name: Echo CI Check Name
+        run: |
+          echo "The CI check that succeeded is: '${{ github.event.check_run.name }}'"
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Run Script
         run: |
           echo "Konflux CI check '${{ github.event.check_run.name }}' succeeded! Running the script..."
-          bash ./tools/snapshot-generator/conr.sh
