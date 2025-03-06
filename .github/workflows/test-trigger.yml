@@ -12,7 +12,7 @@ jobs:
       github.event.check_run.conclusion == 'success' &&
       startsWith(github.event.check_run.name, 'Konflux Production Internal / rbc-') &&
       github.event.check_run.app.name == 'GitHub Actions' &&
-      github.repository == 'red-hat-data-services/RHOAI-Build-Config-rm'  # Replace with your repo
+      github.repository == 'red-hat-data-services/RHOAI-Build-Config-rm'
 
     steps:
       - name: Debug Event Payload
@@ -28,4 +28,3 @@ jobs:
       - name: Run Script
         run: |
           echo "🚀 Konflux CI check '${{ github.event.check_run.name }}' succeeded! Running the script..."
-        
