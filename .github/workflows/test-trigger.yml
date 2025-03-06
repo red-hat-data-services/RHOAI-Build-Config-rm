@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.check_run.conclusion == 'success' &&
-      startsWith(github.event.check_run.name, 'Konflux Production Internal / rbc-') &&
+      startsWith(github.event.check_run.name, 'Konflux Production Internal / rbc-')
 
     steps:
       - name: Debug Event Payload
