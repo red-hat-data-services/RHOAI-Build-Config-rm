@@ -1,4 +1,4 @@
-name: Branch
+name: Debug Konflux CI
 
 on:
   check_run:
@@ -10,8 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.check_run.conclusion == 'success' &&
-      (startsWith(github.event.check_run.head_branch, 'test-') || 
-       startsWith(github.event.check_run.pull_requests[0].head.ref, 'test-'))
+      (
+        (github.event.check_run.head_branch != '' && 
+         startsWith(github.event.check_run.head_branch, 'test-')) ||
+        (github.event.check_run.pull_requests &&
+         github.event.check_run.pull_requests[0].head.ref != '' &&
+         startsWith(github.event.check_run.pull_requests[0].head.ref, 'test-'))
+      )
 
     steps:
       - name: Debug Event Payload
@@ -28,6 +33,11 @@ jobs:
         run: |
           echo "Check Conclusion: '${{ github.event.check_run.conclusion }}'"
 
-      - name: Print Branch Name
+      - name: Print Branch Information
         run: |
-          echo "CI ran on branch: '${{ github.event.check_run.head_branch }}'"
+          echo "CI ran on head_branch: '${{ github.event.check_run.head_branch }}'"
+          if [[ -n "${{ github.event.check_run.pull_requests[0].head.ref }}" ]]; then
+            echo "CI ran on PR branch: '${{ github.event.check_run.pull_requests[0].head.ref }}'"
+          else
+            echo "No pull request associated."
+          fi
