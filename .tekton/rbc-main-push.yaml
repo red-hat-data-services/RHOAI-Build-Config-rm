@@ -575,6 +575,8 @@ spec:
             TARGET_BRANCH="$(params.target_branch)" 
             echo "Triggering Conforma workflow for branch: $TARGET_BRANCH"
 
+            GITHUB_TOKEN=$(cat /secrets/github-token)
+
             curl -X POST "$WORKFLOW_URL" -H "Content-Type: application/json" \
              -d '{ "ref": "'"$TARGET_BRANCH"'" }'
     workspaces:
