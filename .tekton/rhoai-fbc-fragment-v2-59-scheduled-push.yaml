@@ -28,6 +28,10 @@ spec:
     value: Dockerfile.konflux
   - name: path-context
     value: .
+  - name: target_branch
+    value: "main"
+  - name: workflow_url
+    value: "https://github.com/red-hat-data-services/conforma-reporter/actions/workflows/test.yml"
   - name: repo-owner
     value: "red-hat-data-services"
   - name: repo-name
