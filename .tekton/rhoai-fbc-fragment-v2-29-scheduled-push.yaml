@@ -332,7 +332,8 @@ spec:
       optional: true
     - name: netrc
       optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-rhoai-fbc-fragment-v2-29-scheduled
   workspaces:
   - name: git-auth
     secret:
