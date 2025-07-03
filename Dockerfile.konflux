@@ -1,2 +1,2 @@
-FROM registry.redhat.io/openshift4/ose-oauth-proxy@sha256:5391e9ec3748fec2b820db5fb0b8bd167a1efd607b8a0c090cce5ad2e94f4fcc
+FROM registry.redhat.io/openshift4/ose-oauth-proxy@sha256:bf0607d18ab1be9c433492ebd3b317a2692f0f9670f0b20abd085de1558083f8
 RUN echo "Hello, World!"
