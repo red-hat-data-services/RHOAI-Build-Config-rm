@@ -1,3 +1,3 @@
 FROM ubi8
-FROM registry.access.redhat.com/ubi8/ubi@sha256:ceea2c6434cc16cd796b7fcab26f351c308675bd3256894f7377262f3ed2f277
+FROM registry.access.redhat.com/ubi8/ubi@sha256:00da037bbdbacdeb2bd15c4e8f4a4a89b56063757f14c52ef6e68766831acd7b
 RUN echo "Hello, World!"
